@@ -4,9 +4,22 @@ on:
     branches:
       - master
       - test
+  pull_request:
+    branches:
+      - master
+      - test
+
 jobs:
   on-push:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: "On Push Event"
-        run: echo "This job runs on push events to the master branch."
+        run: echo "This job runs on push events to the master/test branch."
+        
+  on-pull-request:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest  
+    steps:
+      - name: "On Pull Request Event"
+        run: echo "This job runs on pull request events to the master/test branch."
